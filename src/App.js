@@ -1,75 +1,35 @@
-import "./App.css";
+import Directory from "./components/directory/directory.component";
 
-/****** */
-import * as React from "react";
-import ImageList from "@mui/material/ImageList";
-import ImageListItem from "@mui/material/ImageListItem";
-import ImageListItemBar from "@mui/material/ImageListItemBar";
-// import ListSubheader from "@mui/material/ListSubheader";
-import IconButton from "@mui/material/IconButton";
-import InfoIcon from "@mui/icons-material/Info";
-import { v4 as uuidv4 } from "uuid";
-/******* */
-
-function App() {
-  const storeCategories = [
+const App = () => {
+  const categories = [
     {
-      id: uuidv4(),
-      category: "Women",
-      img: "https://images.unsplash.com/photo-1551963831-b3b1ca40c98e",
+      id: 1,
+      title: "hats",
+      imageUrl: "https://i.ibb.co/cvpntL1/hats.png",
     },
     {
-      id: uuidv4(),
-      category: "Mens",
-      img: "https://images.unsplash.com/photo-1551782450-a2132b4ba21d",
+      id: 2,
+      title: "jackets",
+      imageUrl: "https://i.ibb.co/px2tCc3/jackets.png",
     },
     {
-      id: uuidv4(),
-      category: "Hats",
-      img: "https://images.unsplash.com/photo-1522770179533-24471fcdba45",
+      id: 3,
+      title: "sneakers",
+      imageUrl: "https://i.ibb.co/0jqHpnp/sneakers.png",
     },
     {
-      id: uuidv4(),
-      category: "Jackets",
-      img: "https://images.unsplash.com/photo-1444418776041-9c7e33cc5a9c",
+      id: 4,
+      title: "womens",
+      imageUrl: "https://i.ibb.co/GCCdy8t/womens.png",
     },
     {
-      id: uuidv4(),
-      category: "Shoes",
-      img: "https://images.unsplash.com/photo-1533827432537-70133748f5c8",
+      id: 5,
+      title: "mens",
+      imageUrl: "https://i.ibb.co/R70vBrQ/men.png",
     },
   ];
-  return (
-    <div className="categories-container">
-      <ImageList sx={{ width: 500, height: 450 }}>
-        <ImageListItem key="Subheader" cols={2}>
-          {/* <ListSubheader component="div">December</ListSubheader> */}
-        </ImageListItem>
-        {storeCategories.map((item) => (
-          <ImageListItem key={item.id}>
-            <img
-              // src={`${item.img}?w=248&fit=crop&auto=format`}
-              // srcSet={`${item.img}?w=248&fit=crop&auto=format&dpr=2 2x`}
-              alt={item.title}
-              loading="lazy"
-            />
-            <ImageListItemBar
-              title={item.category}
-              subtitle="Shop now"
-              actionIcon={
-                <IconButton
-                  sx={{ color: "rgba(255, 255, 255, 0.54)" }}
-                  aria-label={`info about ${item.title}`}
-                >
-                  <InfoIcon />
-                </IconButton>
-              }
-            />
-          </ImageListItem>
-        ))}
-      </ImageList>
-    </div>
-  );
-}
+
+  return <Directory categories={categories} />;
+};
 
 export default App;
