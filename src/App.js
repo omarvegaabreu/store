@@ -40,7 +40,7 @@ function App() {
     },
   ];
   return (
-    <div className="App">
+    <div className="categories-container">
       <ImageList sx={{ width: 500, height: 450 }}>
         <ImageListItem key="Subheader" cols={2}>
           {/* <ListSubheader component="div">December</ListSubheader> */}
@@ -55,7 +55,7 @@ function App() {
             />
             <ImageListItemBar
               title={item.category}
-              // subtitle={item.author}
+              subtitle="Shop now"
               actionIcon={
                 <IconButton
                   sx={{ color: "rgba(255, 255, 255, 0.54)" }}
