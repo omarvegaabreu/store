@@ -1,5 +1,7 @@
+import LogIn from "../../components/Login/Login.Component";
+
 const SingIn = () => {
-  return <h1>SingIn</h1>;
+  return <LogIn />;
 };
 
 export default SingIn;
