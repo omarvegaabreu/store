@@ -1,21 +1,21 @@
+import {
+  signInWithGooglePopup,
+  createUserFromGoogleAuth,
+} from "../../utils/firebase";
+
 const LogIn = () => {
+  const logInWithGoogle = async () => {
+    const { user } = await signInWithGooglePopup();
+    const userDocRed = await createUserFromGoogleAuth(user);
+  };
+
+  const onButtonClick = () => {
+    logInWithGoogle();
+  };
+
   return (
     <div className="form">
-      <form>
-        <div className="input-container">
-          <label>Username </label>
-          <input type="text" name="uname" required />
-          {/* {renderErrorMessage("uname")} */}
-        </div>
-        <div className="input-container">
-          <label>Password </label>
-          <input type="password" name="pass" required />
-          {/* {renderErrorMessage("pass")} */}
-        </div>
-        <div className="button-container">
-          <input type="submit" />
-        </div>
-      </form>
+      <button onClick={onButtonClick}>this submit</button>
     </div>
   );
 };
