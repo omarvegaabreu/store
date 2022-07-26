@@ -1,4 +1,5 @@
 import { async } from "@firebase/util";
+import { PasswordOutlined } from "@mui/icons-material";
 import { initializeApp } from "firebase/app";
 
 import {
@@ -6,6 +7,7 @@ import {
   signInWithRedirect,
   signInWithPopup,
   GoogleAuthProvider,
+  createUserWithEmailAndPassword,
 } from "firebase/auth";
 import { getFirestore, doc, getDoc, setDoc } from "firebase/firestore";
 
@@ -36,7 +38,11 @@ export const signInWithGoogleRedirect = () =>
 
 export const db = getFirestore();
 
-export const createUserFromGoogleAuth = async (userAuth) => {
+export const createUserFromGoogleAuth = async (
+  userAuth,
+  additionalInformation
+) => {
+  if (!userAuth) return;
   const userDocRef = doc(db, "users", userAuth.uid);
   const getUserDoc = await getDoc(userDocRef);
 
@@ -49,6 +55,7 @@ export const createUserFromGoogleAuth = async (userAuth) => {
         displayName,
         email,
         createdAt,
+        ...additionalInformation,
       });
     } catch (error) {
       console.log("error creating user", error.message);
@@ -56,4 +63,10 @@ export const createUserFromGoogleAuth = async (userAuth) => {
   }
 
   return userDocRef;
+};
+
+export const createUserAuthWithEmailAndPassword = async (email, password) => {
+  if (!email || !password) return;
+
+  return await createUserWithEmailAndPassword(auth, email, password);
 };
