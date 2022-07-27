@@ -12,7 +12,11 @@ const LogIn = () => {
   useEffect(() => {
     async function getResponse() {
       const response = await getRedirectResult(auth);
+
+      if (!response) return;
+
       const { user } = response;
+
       const userDocRed = await createUserFromGoogleAuth(user);
     }
     getResponse();
@@ -29,7 +33,6 @@ const LogIn = () => {
 
   return (
     <div className="form">
-      <h1>Sign In</h1>
       <SignUpForm />
       <button onClick={onButtonClick}>this submit</button>,
       <button onClick={signInWithGoogleRedirect}>google redirect</button>
