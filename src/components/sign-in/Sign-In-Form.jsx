@@ -1,17 +1,14 @@
+import { useState, useContext } from "react";
+
 import Button from "../button/Button.Component";
 import FormInput from "../form-input/Form.Input.Component";
-
 import {
-  auth,
   createUserFromGoogleAuth,
   signInUserWithEmailAndPassword,
   signInWithGooglePopup,
 } from "../../utils/firebase";
-
-import { useState } from "react";
-
+import { UserContext } from "../../context/User.context";
 import "./Sign-In-Form.Styles.scss";
-import { fetchSignInMethodsForEmail } from "firebase/auth";
 
 const defaultFormFields = {
   email: "",
@@ -21,6 +18,7 @@ const defaultFormFields = {
 const SignIn = () => {
   const [formFields, setFormFields] = useState(defaultFormFields);
   const { email, password } = formFields;
+  const { setCurrentUser } = useContext(UserContext);
 
   const handleFormChange = (event) => {
     const { name, value } = event.target;
@@ -32,15 +30,20 @@ const SignIn = () => {
     const { email, password } = formFields;
 
     try {
-      const response = await signInUserWithEmailAndPassword(email, password);
-      console.log(response);
+      const { user } = await signInUserWithEmailAndPassword(email, password);
+
+      setCurrentUser(user);
     } catch (error) {
-      if (error.code === "auth/user-not-found") {
-        alert("Invalid email");
-      } else if (error.code === "auth/wrong-password") {
-        alert("Invalid password");
-      } else {
-        console.log(error.code);
+      switch (error.code) {
+        case "auth/user-not-found":
+          alert("Invalid email");
+          break;
+        case "auth/wrong-password":
+          alert("Invalid password");
+          break;
+
+        default:
+          break;
       }
     }
   };
