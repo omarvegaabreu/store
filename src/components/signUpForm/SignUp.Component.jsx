@@ -1,6 +1,5 @@
 import Button from "../button/Button.Component";
 import FormInput from "../form-input/Form.Input.Component";
-import SignIn from "../sign-in/Sign-In-Form";
 
 import {
   createUserAuthWithEmailAndPassword,
@@ -41,13 +40,11 @@ const SignUpForm = () => {
         password
       );
 
-      const userFromGoogleAuth = await createUserFromGoogleAuth(user, {
+      await createUserFromGoogleAuth(user, {
         displayName,
       });
 
       setFormFields(defaultFormFields);
-
-      console.log(userFromGoogleAuth);
     } catch (error) {
       if (error.code === "auth/email-already-in-use") {
         alert("Email already in use. Please use another email");
