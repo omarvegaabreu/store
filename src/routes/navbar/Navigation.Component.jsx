@@ -5,7 +5,7 @@ import { ReactComponent as CrownLogo } from "../../assets/crown.svg";
 
 import { useContext } from "react";
 import { UserContext } from "../../context/User.context";
-import { CartDropdownContext } from "../../context/CartDropdown.context";
+import { CartContext } from "../../context/Cart.context";
 
 import { userSignOut } from "../../utils/firebase";
 
@@ -16,7 +16,7 @@ import "./navigation.styles.scss";
 
 const NavBarComponent = () => {
   const { currentUser } = useContext(UserContext);
-  const { isCartOpen } = useContext(CartDropdownContext);
+  const { isCartOpen } = useContext(CartContext);
 
   return (
     <Fragment>
