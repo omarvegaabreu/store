@@ -11,6 +11,7 @@ const Checkout = () => {
     setCartCount,
     removeItemFromCart,
     deleteItemFromCart,
+    cartTotal,
   } = useContext(CartContext);
 
   const subtractItemHandler = (cartItem) => {
@@ -22,6 +23,12 @@ const Checkout = () => {
   const onDeleteHandler = (cartItem) => {
     deleteItemFromCart(cartItem);
   };
+
+  const cartItemsTotal = cartItems.map((items) => {
+    const { price, quantity } = items;
+    return price * quantity;
+  });
+  // console.log(cartItemsTotal);
   return (
     <div>
       {cartItems.map((cartItem) => {
@@ -40,6 +47,7 @@ const Checkout = () => {
           </div>
         );
       })}
+      <div>Total:{cartTotal}</div>
     </div>
   );
 };

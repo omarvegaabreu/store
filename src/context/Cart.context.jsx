@@ -44,10 +44,11 @@ const deleteCartItem = (cartItems, productToDelete) => {
 
 export const CartContext = createContext({
   isCartOpen: false,
-  setIsCartOpen: () => {},
-  cartItems: [],
-  addItemsToCart: () => {},
   cartCount: 0,
+  cartItems: [],
+  cartTotal: 0,
+  setIsCartOpen: () => {},
+  addItemsToCart: () => {},
   removeCartItem: () => {},
   deleteCartItem: () => {},
 });
@@ -59,12 +60,25 @@ export const CartProvider = ({ children }) => {
 
   const [cartCount, setCartCount] = useState(0);
 
+  const [cartTotal, setCartTotal] = useState(0);
+
   useEffect(() => {
     const newCartCount = cartItems.reduce(
       (total, cartItem) => total + cartItem.quantity,
       0
     );
     setCartCount(newCartCount);
+  }, [cartItems]);
+
+  useEffect(() => {
+    const total = cartItems.map((items) => {
+      return items.quantity * items.price;
+    });
+    const cartTotalSum = total.reduce((previousValue, currentValue) => {
+      return previousValue + currentValue;
+    }, 0);
+
+    setCartTotal(cartTotalSum);
   }, [cartItems]);
 
   const addItemsToCart = (productToAdd) => {
@@ -85,10 +99,11 @@ export const CartProvider = ({ children }) => {
 
   const value = {
     isCartOpen,
-    setIsCartOpen,
     cartItems,
-    addItemsToCart,
     cartCount,
+    cartTotal,
+    addItemsToCart,
+    setIsCartOpen,
     setCartCount,
     removeItemFromCart,
     deleteItemFromCart,
