@@ -3,6 +3,7 @@ import NavBarComponent from "./routes/navbar/Navigation.Component";
 import Shop from "./components/shop/Shop.Component";
 import { Routes, Route } from "react-router-dom";
 import Authentication from "./routes/authentication/Authentication.Component";
+import CheckoutRouteComponent from "./routes/checkout/Checkout.route.Component";
 
 // import { Home } from "@mui/icons-material";
 const App = () => {
@@ -13,6 +14,7 @@ const App = () => {
         <Route index element={<HomeRoute />} />
         <Route path="shop" element={<Shop />} />
         <Route path="auth" element={<Authentication />} />
+        <Route path="checkout" element={<CheckoutRouteComponent />} />
       </Route>
     </Routes>
   );
