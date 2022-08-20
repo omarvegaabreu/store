@@ -28,6 +28,7 @@ const removeCartItem = (cartItems, productToRemove) => {
         : cartItem
     );
   }
+
   return [...cartItems, { ...productToRemove, quantity: 1 }];
 };
 

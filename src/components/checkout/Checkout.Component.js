@@ -2,19 +2,20 @@ import { useContext } from "react";
 import { CartContext } from "../../context/Cart.context";
 import CartItem from "../cart-item/CartItem.component";
 import Button from "../button/Button.Component";
-
+import "./checkout.component.styles.scss";
 const Checkout = () => {
   const {
     cartItems,
-    addItemsToCart,
-    cartCount,
-    setCartCount,
     removeItemFromCart,
     deleteItemFromCart,
     cartTotal,
+    addItemsToCart,
   } = useContext(CartContext);
 
   const subtractItemHandler = (cartItem) => {
+    if (cartItem.quantity === 0) {
+      deleteItemFromCart(cartItem);
+    }
     removeItemFromCart(cartItem);
   };
   const addItemHandler = (cartItems) => {
@@ -24,30 +25,48 @@ const Checkout = () => {
     deleteItemFromCart(cartItem);
   };
 
-  const cartItemsTotal = cartItems.map((items) => {
-    const { price, quantity } = items;
-    return price * quantity;
-  });
-  // console.log(cartItemsTotal);
   return (
-    <div>
+    <div className="checkout-container">
+      <div className="checkout-header">
+        <div className="header-block">
+          <span>Product</span>
+        </div>
+        <div className="header-block">
+          <span>Description</span>
+        </div>
+        <div className="header-block">
+          <span>Quantity</span>
+        </div>
+        <div className="header-block">
+          <span>Price</span>
+        </div>
+        <div className="header-block">
+          <span>Remove</span>
+        </div>
+      </div>
       {cartItems.map((cartItem) => {
         const { quantity } = cartItem;
         return (
-          <div>
-            <CartItem key={cartItem.id} cartItem={cartItem} />
-            <span onClick={() => subtractItemHandler(cartItem)} class="minus">
+          <div className="" key={cartItem.id}>
+            <CartItem cartItem={cartItem} />
+            <span
+              onClick={() => subtractItemHandler(cartItem)}
+              className="minus"
+            >
               -
             </span>
             {quantity}
-            <span onClick={() => addItemHandler(cartItem)} class="plus">
+            <span onClick={() => addItemHandler(cartItem)} className="plus">
               +
             </span>
-            <Button onClick={() => onDeleteHandler(cartItem)}>delete</Button>
+
+            <div onClick={() => onDeleteHandler(cartItem)}>&#10005;</div>
           </div>
         );
       })}
-      <div>Total:{cartTotal}</div>
+      <div className="total">
+        {cartTotal > 0 ? `Total amount pay  $ ${cartTotal}` : null}
+      </div>
     </div>
   );
 };
