@@ -32,6 +32,8 @@ const Checkout = () => {
         <CheckoutItem key={cartItem.id} cartItem={cartItem} />
       ))}
       <div className="total">
+        {/* need to add smooth transition to this part */}
+        {/* need to add smooth transition to this part */}
         {cartTotal === 0 ? <h5>Cart is Empty</h5> : `TOTAL: ${cartTotal}`}
       </div>
     </div>
