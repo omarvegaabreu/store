@@ -3,9 +3,9 @@ import Checkout from "../../components/checkout/Checkout.Component";
 
 const CheckoutRouteComponent = () => {
   return (
-    <Fragment>
+    <>
       <Checkout />
-    </Fragment>
+    </>
   );
 };
 

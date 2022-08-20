@@ -1,29 +1,13 @@
 import { useContext } from "react";
-import { CartContext } from "../../context/Cart.context";
-import CartItem from "../cart-item/CartItem.component";
-import Button from "../button/Button.Component";
-import "./checkout.component.styles.scss";
-const Checkout = () => {
-  const {
-    cartItems,
-    removeItemFromCart,
-    deleteItemFromCart,
-    cartTotal,
-    addItemsToCart,
-  } = useContext(CartContext);
 
-  const subtractItemHandler = (cartItem) => {
-    if (cartItem.quantity === 0) {
-      deleteItemFromCart(cartItem);
-    }
-    removeItemFromCart(cartItem);
-  };
-  const addItemHandler = (cartItems) => {
-    addItemsToCart(cartItems);
-  };
-  const onDeleteHandler = (cartItem) => {
-    deleteItemFromCart(cartItem);
-  };
+import { CartContext } from "../../context/Cart.context.jsx";
+
+import CheckoutItem from "../checkout-item/CheckoutItem.component";
+
+import "./checkout.component.styles.scss";
+
+const Checkout = () => {
+  const { cartItems, cartTotal } = useContext(CartContext);
 
   return (
     <div className="checkout-container">
@@ -44,28 +28,11 @@ const Checkout = () => {
           <span>Remove</span>
         </div>
       </div>
-      {cartItems.map((cartItem) => {
-        const { quantity } = cartItem;
-        return (
-          <div className="" key={cartItem.id}>
-            <CartItem cartItem={cartItem} />
-            <span
-              onClick={() => subtractItemHandler(cartItem)}
-              className="minus"
-            >
-              -
-            </span>
-            {quantity}
-            <span onClick={() => addItemHandler(cartItem)} className="plus">
-              +
-            </span>
-
-            <div onClick={() => onDeleteHandler(cartItem)}>&#10005;</div>
-          </div>
-        );
-      })}
+      {cartItems.map((cartItem) => (
+        <CheckoutItem key={cartItem.id} cartItem={cartItem} />
+      ))}
       <div className="total">
-        {cartTotal > 0 ? `Total amount pay  $ ${cartTotal}` : null}
+        {cartTotal === 0 ? <h5>Cart is Empty</h5> : `TOTAL: ${cartTotal}`}
       </div>
     </div>
   );

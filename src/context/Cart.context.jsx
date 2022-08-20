@@ -1,11 +1,10 @@
 import { createContext, useState, useEffect } from "react";
 
 const addCartItem = (cartItems, productToAdd) => {
-  //find if cartItems contains product to add
   const existingCartItem = cartItems.find(
     (cartItem) => cartItem.id === productToAdd.id
   );
-  //if found increment quantity of cart item
+
   if (existingCartItem) {
     return cartItems.map((cartItem) =>
       cartItem.id === productToAdd.id
@@ -72,14 +71,11 @@ export const CartProvider = ({ children }) => {
   }, [cartItems]);
 
   useEffect(() => {
-    const total = cartItems.map((items) => {
-      return items.quantity * items.price;
-    });
-    const cartTotalSum = total.reduce((previousValue, currentValue) => {
-      return previousValue + currentValue;
-    }, 0);
-
-    setCartTotal(cartTotalSum);
+    const newCartTotal = cartItems.reduce(
+      (total, cartItem) => total + cartItem.quantity * cartItem.price,
+      0
+    );
+    setCartTotal(newCartTotal);
   }, [cartItems]);
 
   const addItemsToCart = (productToAdd) => {
