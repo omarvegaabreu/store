@@ -58,33 +58,18 @@ export const addCollectionAndDocuments = async (
 };
 
 export const getCategoriesAndDocuments = async () => {
-  //get collection, pass db credentials and 'categories' is the collection you are retrieving
   const collectionRef = collection(db, "categories");
-  //query is method to get collection in your db.
+
   const queryCollection = query(collectionRef);
-  //waiting for collection from firebase
+
   const querySnapShot = await getDocs(queryCollection);
 
-  //reduce to create object
-  /**
-   * {
-   * items category:{
-   *        title:'item title',
-   *            items:[
-   *                   {},
-   *                    {},
-   *                  ]
-   *                }
-   * }
-   */
-
   const categoryMap = querySnapShot.docs.reduce((acc, docSnapShot) => {
-    console.log(docSnapShot);
     const { items, title } = docSnapShot.data();
     acc[title.toLowerCase()] = items;
     return acc;
   }, {});
-  console.log("category map");
+
   return categoryMap;
 };
 
