@@ -12,7 +12,13 @@ const App = () => {
       {/* parent component */}
       <Route path="/" element={<NavBarComponent />}>
         <Route index element={<HomeRoute />} />
-        <Route path="shop" element={<Shop />} />
+        <Route path="shop" element={<Shop />}>
+          <Route path="hats" element={<h1>hats</h1>} />
+          <Route path="jackets" element={<h1>jackets</h1>} />
+          <Route path="mens" element={<h1>mens</h1>} />
+          <Route path="womens" element={<h1>women</h1>} />
+          <Route path="sneakers" element={<h1>sneakers</h1>} />
+        </Route>
         <Route path="auth" element={<Authentication />} />
         <Route path="checkout" element={<CheckoutRouteComponent />} />
       </Route>
