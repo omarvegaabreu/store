@@ -20,7 +20,6 @@ const Category = () => {
     <div className="category-container">
       {products &&
         products.map((product) => {
-          console.log(product);
           return <ProductCard key={product.id} products={product} />;
         })}
     </div>
