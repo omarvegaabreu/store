@@ -21,7 +21,12 @@
     display: flex;
     flex-direction: column;
     overflow: scroll;
+   
   }
+    img {
+      max-width: 30%;
+      
+    }
 
   button {
     margin-top: auto;
