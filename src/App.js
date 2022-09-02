@@ -1,11 +1,29 @@
+import { useEffect } from "react";
+import { Routes, Route } from "react-router-dom";
+import { useDispatch } from "react-redux";
+
 import HomeRoute from "./routes/home/Home.Route.Component";
 import NavBarComponent from "./routes/navbar/Navigation.Component";
 import Shop from "./routes/shop/Shop.component";
-import { Routes, Route } from "react-router-dom";
 import Authentication from "./routes/authentication/Authentication.Component";
 import CheckoutRouteComponent from "./routes/checkout/Checkout.route.Component";
+import {
+  onAuthStateChangeListener,
+  createUserFromGoogleAuth,
+} from "./utils/firebase";
+import { setCurrentUser } from "./store/user/user.action";
 
 const App = () => {
+  const dispatch = useDispatch();
+  useEffect(() => {
+    const unSubscribe = onAuthStateChangeListener((user) => {
+      if (user) {
+        createUserFromGoogleAuth(user);
+      }
+      dispatch(setCurrentUser(user));
+    });
+    return unSubscribe;
+  }, [dispatch]);
   return (
     <Routes>
       <Route path="/" element={<NavBarComponent />}>
