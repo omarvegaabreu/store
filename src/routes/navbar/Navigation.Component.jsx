@@ -5,8 +5,8 @@ import { useSelector } from "react-redux";
 import { ReactComponent as CrownLogo } from "../../assets/crown.svg";
 
 import { useContext } from "react";
-import { UserContext } from "../../context/User.context";
 import { CartContext } from "../../context/Cart.context";
+import { selectCurrentUser } from "../../store/user/user.selector";
 
 import { userSignOut } from "../../utils/firebase";
 
@@ -16,7 +16,7 @@ import CartDropdown from "../../components/cart-drop-down/CartDropDown.component
 import "./navigation.styles.scss";
 
 const NavBarComponent = () => {
-  const currentUser = useSelector((state) => state.user.currentUser);
+  const currentUser = useSelector(selectCurrentUser);
   const { isCartOpen } = useContext(CartContext);
 
   return (
