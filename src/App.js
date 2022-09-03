@@ -10,11 +10,14 @@ import CheckoutRouteComponent from "./routes/checkout/Checkout.route.Component";
 import {
   onAuthStateChangeListener,
   createUserFromGoogleAuth,
+  getCategoriesAndDocuments,
 } from "./utils/firebase";
 import { setCurrentUser } from "./store/user/user.action";
+import { setCategoriesMap } from "./store/categories/categories.action";
 
 const App = () => {
   const dispatch = useDispatch();
+
   useEffect(() => {
     const unSubscribe = onAuthStateChangeListener((user) => {
       if (user) {
@@ -24,6 +27,16 @@ const App = () => {
     });
     return unSubscribe;
   }, [dispatch]);
+
+  useEffect(() => {
+    const getCategoriesMap = async () => {
+      const categoryMap = await getCategoriesAndDocuments();
+
+      dispatch(setCategoriesMap(categoryMap));
+    };
+    getCategoriesMap();
+  }, [dispatch]);
+
   return (
     <Routes>
       <Route path="/" element={<NavBarComponent />}>
