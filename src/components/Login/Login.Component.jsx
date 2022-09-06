@@ -18,7 +18,7 @@ const LogIn = () => {
 
       const { user } = response;
 
-      const userDocRed = await createUserFromGoogleAuth(user);
+      await createUserFromGoogleAuth(user);
     }
     getResponse();
   }, []);

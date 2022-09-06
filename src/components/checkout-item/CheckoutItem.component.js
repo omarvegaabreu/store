@@ -10,7 +10,6 @@ const CheckoutItem = ({ cartItem }) => {
     useContext(CartContext);
 
   const subtractItemHandler = () => {
-    console.log(cartItem);
     if (cartItem.quantity === 0) {
       deleteItemFromCart(cartItem);
     }
