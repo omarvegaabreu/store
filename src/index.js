@@ -5,7 +5,7 @@ import { Provider } from "react-redux";
 import { store } from "./store/store";
 import "./index.css";
 import App from "./App";
-// import { CategoriesProvider } from "./context/Categories.Context";
+
 import { CartProvider } from "./context/Cart.context";
 
 const root = ReactDOM.createRoot(document.getElementById("root"));
